@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}?v=2">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="container-h">
+            <div><a href="{% url 'about' %}" class="nav-button">About</a></div>
+            <div><a href="{% url 'menu' %}" class="nav-button">Menu</a></div>
+        </div>
+    </nav>
+    
+    <div class="container-v">
+        <h1 class="title">Smart Traffic Control System</h1>
+        <marquee> Keompok 3</marquee>
+        <h2>Video</h2>
+    </div>
+
+    <div class="container-h">
+        <table>
+            <tr>
+                <td>
+                    <div class="video-container">
+                        <img src="{% url 'video_feed' %}" alt="Traffic video">
+                    </div>
+                </td>
+                <td>
+                    <div class="video-container">
+                        <img src="{% url 'video_feed' %}" alt="Traffic video">
+                    </div>
+                </td>
+                <td>
+                    <div class="video-container">
+                        <img src="{% url 'video_feed' %}" alt="Traffic video">
+                    </div>
+                </td>
+                <td>
+                    <div class="video-container">
+                        <img src="{% url 'video_feed' %}" alt="Traffic video">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: center;">
+                    <h2>insert</h2>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

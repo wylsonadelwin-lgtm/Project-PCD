@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}?v=2">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<nav>
+    <div class="container-h">
+    <div><a href="{% url 'menu' %}" class="nav-button">Menu</a></div>
+    <div><a href="{% url 'traffic' %}" class="nav-button">Traffic</a></div>
+</nav>
+<body>
+
+    <div class="container-h"> 
+        <div><h1>About Us</h1></div>  
+    </div>
+
+    <div>
+        <div class="container-v">
+            <div class="box">
+                <h2>Smart Traffic Control System</h2>
+            </div>
+            <div class="box">
+                <p >Smart Traffic Control System adalah sistem yang dirancang untuk mengelola lalu lintas secara efisien menggunakan teknologi canggih seperti pemrosesan video real-time dan algoritma pembelajaran mesin. Sistem ini bertujuan untuk mengurangi kemacetan, meningkatkan keselamatan jalan, dan mengoptimalkan aliran lalu lintas di area perkotaan.</p>
+            </div>
+        </div>
+    </div>
+
+    <!--cards-->
+    <div class="container-v">
+        <h1>Our Team</h1>
+    <div class="container-h">
+        <div class="cards">
+            <img src="{% static 'assets/mybini.jpg' %}" alt="Nicko">
+            <h2 class="text-2xl">Nicko</h2>
+            <p>NiggaKilla</p>
+        </div>
+         <div class="cards">
+            <img src="{% static 'assets/wilson.png' %}" alt="Wilson">
+            <h2 class="text-2xl">Wylson</h2>
+            <p>ketua</p>
+        </div>
+        <div class="cards">
+            <img src="{% static 'assets/irkham.png' %}" alt="irkham">
+            <h2 class="text-2xl">Irkham</h2>
+            <p>Nigga 1</p>
+        </div>
+        <div class="cards">
+            <img src="{% static 'assets/virgi.png' %}" alt="virgi">
+            <h2 class="text-2xl">Virgi</h2>
+            <p>Nigga 2</p>
+        </div>
+        </div>
+       
+    </div>
+    <footer class="footer">
+        <div>
+            <p>&copy; 2024 Smart Traffic Control System. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

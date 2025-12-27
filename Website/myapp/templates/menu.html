@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}?v=2">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<nav>
+    <div class="container-h">
+        <div><a href="{% url 'traffic' %}" class="nav-button">Traffic</a></div>
+        <div><a href="{% url 'about' %}" class="nav-button">About</a></div>
+    </div>
+</nav>
+<body>
+    <div class="container-h">
+        <div class="container-v">
+            <div class="container">
+                <h1>Bukankah ini mY</h1>
+            </div>
+            <div class="container-button">
+                <button id="Mulai">Mulai</button>
+            </div>
+        </div>
+        <div class="container-v">
+            <div class="container">
+               <img src="{% static 'assets/mybini.jpg' %}" alt="" style="width: 200px; height: 200px; margin: 20px;">
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
