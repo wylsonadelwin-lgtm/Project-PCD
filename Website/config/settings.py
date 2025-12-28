@@ -15,7 +15,12 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = BASE_DIR/'myapp'/'media'
+MEDIA_URL = '/media/'
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
+
+FILE_UPLOAD_PERMISSIONS = 0o644
 # This is the URL used to access media in the browser
 
 # Quick-start development settings - unsuitable for production
