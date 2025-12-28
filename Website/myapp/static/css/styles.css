@@ -159,15 +159,3 @@ table{
 table td{
     padding: 10px;
 }
-
-.overlay{
-    display: flex;
-    max-width: 300px;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    background-color: #dfdfdf;
-    border-radius: 10px;
-    box-shadow: 0px 2px 30px 0px rgb(0, 0, 0);
-}

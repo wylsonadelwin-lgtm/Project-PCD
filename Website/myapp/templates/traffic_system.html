@@ -43,30 +43,16 @@
                 </td>
                 <td>
                     <div class="video-container">
-                        <img id="resultImage" src="{% static 'assets/placeholder.png' %}" alt="Detection Result">
+                        <img src="{% url 'video_feed' %}" alt="Traffic video">
                     </div>
                 </td>
             </tr>
             <tr>
                 <td colspan="4" style="text-align: center;">
-                    <button id="Upload">Upload</button>
+                    <h2>insert</h2>
                 </td>
             </tr>
         </table>
-    </div>
-    <div class="container-h">
-        <div id="overlay" class="overlay">
-            <div class="overlay-content">
-                <button onclick="off()" class="close-btn">✕</button>
-                <h2>Upload Video/Image</h2>
-                <form id="uploadForm" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="file" id="fileInput" accept="video/mp4,image/*" required>
-                    <button type="submit" class="btn-submit">Detect Traffic</button>
-                </form>
-                <div id="uploadStatus"></div>
-        </div>
-        </div>
     </div>
 </body>
 </html>
