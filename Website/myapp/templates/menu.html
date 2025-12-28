@@ -10,24 +10,22 @@
     <title>Document</title>
 </head>
 <nav>
-    <div class="container-h">
-        <div><a href="{% url 'traffic' %}" class="nav-button">Traffic</a></div>
-        <div><a href="{% url 'about' %}" class="nav-button">About</a></div>
-    </div>
+ <div class="container-h">
+     <div><a href="{% url 'about' %}" class="nav-button">About</a></div>
+     <div><a href="{% url 'menu' %}" class="nav-button">Menu</a></div>
+ </div>
 </nav>
 <body>
-    <div class="container-h">
-        <div class="container-v">
-            <div class="container">
-                <h1>Bukankah ini mY</h1>
-            </div>
-            <div class="container-button">
-                <button id="Mulai">Mulai</button>
+    <div class="grid-container">
+        <div class="row-span-2">
+            <div class="container-v">
+                <h1>NiceNatureBiniGwe.com</h1>
+                <button id="Mulai" class="bg-[#17BEBB] text-white rounded-full w-1/2 shadow-lg hover:bg-white hover:text-[#17BEBB] transition-all"> Mulai</button>
             </div>
         </div>
-        <div class="container-v">
-            <div class="container">
-               <img src="{% static 'assets/mybini.jpg' %}" alt="" style="width: 200px; height: 200px; margin: 20px;">
+        <div class="row-span-2 rounded-l-full bg-[#17BEBB] mt-8 shadow-lg " >
+            <div class="container-v"> 
+            <img src="{% static 'assets/nice-nature-uniform.png' %}" alt="" class="w-auto h-full absolute">
             </div>
         </div>
     </div>
