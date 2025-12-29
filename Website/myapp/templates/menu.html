@@ -17,16 +17,32 @@
 </nav>
 <body>
     <div class="grid-container">
-        <div class="row-span-2">
-            <div class="container-v">
-                <h1>NiceNatureBiniGwe.com</h1>
-                <button id="Mulai" class="bg-[#17BEBB] text-white rounded-full w-1/2 shadow-lg hover:bg-white hover:text-[#17BEBB] transition-all"> Mulai</button>
+        <div class="grid-container">
+            <div class="relative group bg-[url('/static/assets/Bg_0009_00120.png')] bg-fixed  rounded-tl-full text-right hover:bg-blue-500 transition-all text-2xl overflow-hidden" id="Mulai">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-80 transition-all">
+                    Start
+                </div>
+            </div>
+            <div class="relative group bg-[url('/static/assets/Bg_0009_00120.png')] bg-fixed bg-top rounded-br-full text-right hover:bg-blue-500 transition-all text-2xl overflow-hidden row-span-2">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-80 transition-all">
+                    About us
+                </div>
+            </div>
+            <div class="bg-[url('/static/assets/Bg_0009_00120.png')] bg-fixed rounded-bl-full">3</div>
+        </div>
+        <div class="row-span-2 rounded-l-full bg-[url('/static/assets/Bg_0009_00120.png')] bg-fixed mt-8 shadow-lg " >
+            <div class="container-v"> 
+                <img src="{% static 'assets/nice-nature-uniform.png' %}" alt="" class="w-auto h-full absolute hover:scale-110 transition-all">
             </div>
         </div>
-        <div class="row-span-2 rounded-l-full bg-[#17BEBB] mt-8 shadow-lg " >
-            <div class="container-v"> 
-            <img src="{% static 'assets/nice-nature-uniform.png' %}" alt="" class="w-auto h-full absolute">
-            </div>
+        <div class="container-v row-span-3">
+            <h1 class="mb-4px">NiceNatureBiniGwe.com</h1>
+            <button id="Mulai" class="bg-[#17BEBB] text-white rounded-full w-1/2 shadow-lg hover:bg-white hover:text-[#17BEBB] transition-all"> Mulai</button>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="bg-[#17BEBB] col-span-2 mr-4 shadow-lg">
+
         </div>
     </div>
     <script src="{% static 'js/index.js' %}"></script>
