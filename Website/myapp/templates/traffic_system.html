@@ -49,7 +49,11 @@
             </tr>
             <tr>
                 <td colspan="4" style="text-align: center;">
-                    <h2>insert</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="my_file">
+                        <button type="submit">Upload and Read</button>
+                    </form>
                 </td>
             </tr>
         </table>
