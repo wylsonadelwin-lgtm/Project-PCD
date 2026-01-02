@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Document</title>
 </head>
+
 <body>
     <nav>
         <div class="container-h">
@@ -16,47 +18,56 @@
             <div><a href="{% url 'menu' %}" class="nav-button">Menu</a></div>
         </div>
     </nav>
-    
-    <div class="container-v">
-        <h1 class="title">Smart Traffic Control System</h1>
-        <marquee> Keompok 3</marquee>
-        <h2>Video</h2>
-    </div>
+    <div class="grid-container">
 
-    <div class="container-h">
-        <table>
-            <tr>
-                <td>
-                    <div class="video-container">
-                        <img src="{% url 'video_feed' %}" alt="Traffic video">
-                    </div>
-                </td>
-                <td>
-                    <div class="video-container">
-                        <img src="{% url 'video_feed' %}" alt="Traffic video">
-                    </div>
-                </td>
-                <td>
-                    <div class="video-container">
-                        <img src="{% url 'video_feed' %}" alt="Traffic video">
-                    </div>
-                </td>
-                <td>
-                    <div class="video-container">
-                        <img src="{% url 'video_feed' %}" alt="Traffic video">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" style="text-align: center;">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="file" name="my_file">
-                        <button type="submit">Upload and Read</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
+        <div class="col-span-2 text-center">
+            <h1 class="title">Smart Traffic Control System</h1>
+            <marquee class="animate-bounce"> Keompok 3</marquee>
+        </div>
+
+        <!--output-->
+        <div class="shadow-lg rounded-md m-4 min-h-[600px]">
+            {% if active_file_id %}
+            <h3>Demo berhasil</h3>
+            <img src="{% url 'detect_stream' active_file_id %}" width="640" class="w-full h-5/6">
+            {% else %}
+            <p>Upload file atau pilih dari file yang tersedia untuk memulai demo.</p>
+            {% endif %}
+        </div>
+
+        <!--#region form upload file-->
+        <div class="shadow-lg rounded-md p-4 m-4 h-full max-w-full">
+            <form method="post" enctype="multipart/form-data" class="flex flex-col items-center">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p class="text-white">o</p>
+                <button type="submit" class="bg-gray-300 rounded-md w-1/2 m-2 hover:bg-blue-300 transition-all">Upload
+                    File</button>
+            </form>
+            <!-- #endregion -->
+
+            <!-- #region list -->
+            <div class="list-section">
+                <h3 class="text-center mb-3 ">Available Files</h3>
+                <table>
+                    {% for file in files %}
+                    <tr>
+                        <td class="max-w-full overflow-hidden">
+                            {% if file.filename|length > 40 %}
+                            <marquee behavior="scroll" direction="left">{{ file.filename }}</marquee>
+                            {%else%}
+                            <p>{{ file.filename }}</p>
+                            {%endif%}
+                        </td>
+                        <td><a href="?play={{ file.id }}" class="bg-blue-300 rounded-md">Deteksi</a></td>
+                        <td><a href="{% url 'delete_file' file.id %}" class="bg-red-300 rounded-md">Hapus</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <!-- #endregion -->
+        </div>
     </div>
 </body>
+
 </html>

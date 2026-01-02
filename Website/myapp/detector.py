@@ -1,69 +1,76 @@
 import cv2
+import os
+import time
+import numpy as np
 from ultralytics import YOLO
 from django.conf import settings
-import time
-import os
-
-MODEL_PATH = os.path.join(settings.MEDIA_ROOT, 'model_4', 'model_4.pt')
-model = YOLO(MODEL_PATH)
 
 class TrafficDetector:
     def __init__(self, model_rel_path):
         self.model_path = os.path.join(settings.MEDIA_ROOT, model_rel_path)
         self.model = YOLO(self.model_path)
-        self.lampu_state = "GREEN"
-        self.current_timer = 10
-        self.last_time_update = time.time()
+
+    def process_file(self, file_path):
+        ext = os.path.splitext(file_path)[1].lower()
+
+        if ext in ['.jpg', '.jpeg', '.png', '.bmp']:
+            return self.process_image(file_path)
+        elif ext in ['.mp4', '.avi', '.mov', '.mkv']:
+            return self.get_frames(file_path)
+        else:
+            return None
+
+    def process_image(self, image_path):
+        frame = cv2.imread(image_path)
+        if frame is None:
+            return
+            
+        results = self.model.predict(frame, conf=0.5, verbose=False)
+        annotated_frame = results[0].plot()
+        
+        _, buffer = cv2.imencode('.jpg', annotated_frame)
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
 
     def get_frames(self, video_path):
-        cap = cv2.VideoCapture(video_path)
+        current_timer = 10
+        last_time_update = time.time()
+        lampu_state = "RED"
+        total_objek = 0
 
-        if not cap.isOpened():
-            print(f"CRITICAL ERROR: Could not open video file at {video_path}")
-            return # Stop here if it failed
-        
-        frame_count = 0
-        skip_frames = 2  
-        
+
+        cap = cv2.VideoCapture(video_path)
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret: break
-
-            frame = cv2.resize(frame, (640, 480))
-            frame_count += 1
-
-            if frame_count % skip_frames != 0:
-                continue
-
-            # 1. AI Detection
-            results = self.model.predict(frame, conf=0.5, verbose=False)
-            boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
-            objects_count = len(boxes)
-
-            # Draw boxes
-            for box in boxes:
-                cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (255, 0, 0), 2)
-
-            # 2. Timer & Logic (Your exact logic from the notebook)
-            if time.time() - self.last_time_update >= 1:
-                if self.current_timer > 0: self.current_timer -= 1
-                self.last_time_update = time.time()
-
-            if self.current_timer <= 0:
-                if self.lampu_state == "RED":
-                    self.lampu_state = "GREEN"
-                    self.current_timer = 20 if objects_count > 20 else 10
-                else:
-                    self.lampu_state = "RED"
-                    self.current_timer = 30 if objects_count > 20 else 15
-
-            # 3. Annotate Frame
-            color = (0, 255, 0) if self.lampu_state == "GREEN" else (0, 0, 255)
-            cv2.putText(frame, f"STATUS: {self.lampu_state}", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 3)
             
-            # 4. Stream to Web
-            _, buffer = cv2.imencode('.jpg', frame)
+            results = self.model.predict(frame, conf=0.5, verbose=False)
+            annotated_frame = results[0].plot() 
+
+            if time.time() - last_time_update >= 1:
+                if current_timer > 0:
+                    current_timer -= 1
+            last_time_update = time.time()
+
+            if current_timer <= 0:
+                if lampu_state == "RED":
+                    lampu_state = "GREEN"
+                    current_timer = 20 if total_objek > 20 else 10
+
+            else:
+                lampu_state = "RED"
+                current_timer = 30 if total_objek > 20 else 15
+
+            color_map = {
+                "RED" : (0, 0, 255),
+                "GREEN" : (0, 255, 0)
+            }
+            current_color = color_map[lampu_state]
+
+            cv2.putText(frame, f"lampu: {lampu_state}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, current_color, 2)
+
+            _, buffer = cv2.imencode('.jpg', annotated_frame)
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
-
         cap.release()
+
