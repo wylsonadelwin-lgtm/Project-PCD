@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Document</title>
 </head>
-<nav>
-    <div class="container-h">
+<nav class="m-4 rounded-full overflow-hidden"> 
+    <div class="grid grid-cols-2 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)]">
         <div><a href="{% url 'about' %}" class="nav-button">About</a></div>
         <div><a href="{% url 'menu' %}" class="nav-button">Menu</a></div>
     </div>
@@ -20,26 +20,26 @@
 <body>
     <div class="grid-container">
         <div class="grid-container">
-            <div class="relative group bg-[#17BEBB] bg-fixed bg-left rounded-tl-full text-right hover:bg-blue-500 transition-all text-2xl overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]"
+            <div class="relative group bg-[#17BEBB] bg-fixed bg-left rounded-tl-full text-right hover:bg-gray-100 hover:-translate-y-2 transition-all text-2xl overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] hover:shadow-lg"
                 id="Mulai">
+                <h1 class="group-hover:-translate-x-50 transition-all">Start</h1>
                 <div
-                    class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-80 group-hover:text-white transition-all">
-                    Start
+                    class="absolute group-hover:text-white transition-all">
                 </div>
             </div>
-            <div class="relative group bg-[#17BEBB] bg-fixed bg-left rounded-br-full text-right hover:bg-blue-500 transition-all text-2xl overflow-hidden row-span-2 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]"
+            <div class="relative group bg-[#17BEBB] bg-fixed bg-left rounded-br-full text-right hover:bg-gray-100 hover:-translate-y-2 transition-all text-2xl overflow-hidden row-span-2 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] hover:shadow-lg"
                 id="About">
                 <h1>About</h1>
                 <div
-                    class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-80 group-hover:text-white transition-all">
-                    <h1>About</h1>
+                    class="absolute group-hover:text-white transition-all">
+                  
                 </div>
             </div>
             <div class="bg-[#17BEBB] bg-fixed bg-left rounded-bl-full shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]">
             </div>
         </div>
         <div
-            class="row-span-2 rounded-l-full bg-[url('/static/assets/bg2.png')] bg-fixed bg-left mt-8 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]">
+            class="row-span-2 rounded-l-full bg-[#17BEBB] bg-fixed bg-left mt-8 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]">
             <div class="container-v">
                 <img src="{% static 'assets/nice-nature-uniform.png' %}" alt=""
                     class="w-auto h-full absolute hover:scale-110 transition-all">
